@@ -1,0 +1,29 @@
+### POST
+
+POST http://localhost:3000/albums HTTP/1.1
+content-type: application/json
+
+{
+  "AlbumId" : 400,
+  "Title" : "Album for Test",
+  "ArtistId" : 1
+}
+
+### eq
+
+GET http://localhost:3000/albums?AlbumId=400 HTTP/1.1
+
+### PUT
+
+PUT http://localhost:3000/albums?AlbumId=400 HTTP/1.1
+content-type: application/json
+
+{
+  "Title" : "Album for Test2",
+  "ArtistId" : 2
+}
+
+
+### delete
+
+DELETE http://localhost:3000/albums?AlbumId=400 HTTP/1.1
