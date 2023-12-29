@@ -72,6 +72,8 @@ async function default_1(dbPath) {
         extended: true,
     }));
     app.use(body_parser_1.default.json());
+    app.set("views", path_1.default.resolve(__dirname, "../views"));
+    app.set("view engine", "ejs");
     // テーブル名を取得し、それぞれのテーブルに対してエンドポイントを設定する
     const tables = await db.all(`SELECT name FROM sqlite_master WHERE type='table'`);
     for (const table of tables) {
@@ -162,7 +164,7 @@ async function default_1(dbPath) {
         return [...prev, ...methods];
     }, []);
     app.get(`/`, async (req, res) => {
-        res.render('./index.ejs', { dbPath, routes });
+        res.render("index.ejs", { dbPath, routes });
     });
     return { app, routes };
 }

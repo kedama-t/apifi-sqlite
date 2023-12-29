@@ -101,6 +101,8 @@ export default async function (dbPath: string) {
     })
   );
   app.use(bodyParser.json());
+  app.set("views", path.resolve(__dirname, "../views"));
+  app.set("view engine", "ejs");
 
   // テーブル名を取得し、それぞれのテーブルに対してエンドポイントを設定する
   const tables: { name: string }[] = await db.all(
@@ -220,7 +222,7 @@ export default async function (dbPath: string) {
     }, []);
 
   app.get(`/`, async (req, res) => {
-    res.render('./index.ejs', { dbPath, routes });
+    res.render("index.ejs", { dbPath, routes });
   });
 
   return { app, routes };

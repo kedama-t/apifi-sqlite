@@ -2,7 +2,7 @@
 
 Expose SQLite database as REST API
 
-# usage 
+# usage
 
 ```
 npx apifi-sqlite {sqlite_filename} {port}
