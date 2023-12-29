@@ -10,56 +10,56 @@ const sqlite_1 = require("sqlite");
 const path_1 = __importDefault(require("path"));
 const getWhereClauseAndParameters = (query) => {
     const parameters = [];
-    const whereClause = "WHERE " +
+    const whereClause = 'WHERE ' +
         Object.keys(query)
             .map((key) => {
-            const [fieldName, operand] = key.split(",");
+            const [fieldName, operand] = key.split(',');
             const value = query[key];
-            const paramCount = value.split(",").length;
+            const paramCount = value.split(',').length;
             switch (operand?.toLowerCase()) {
-                case "in":
-                    parameters.push(...value.split(","));
-                    return `${fieldName} in (${Array(paramCount).fill("?").join(",")})`;
-                case "notin":
-                    parameters.push(...value.split(","));
+                case 'in':
+                    parameters.push(...value.split(','));
+                    return `${fieldName} in (${Array(paramCount).fill('?').join(',')})`;
+                case 'notin':
+                    parameters.push(...value.split(','));
                     return `${fieldName} not in (${Array(paramCount)
-                        .fill("?")
-                        .join(",")})`;
-                case "like":
+                        .fill('?')
+                        .join(',')})`;
+                case 'like':
                     parameters.push(value);
                     return `${fieldName} like '%' || ? || '%'`;
-                case "notlike":
+                case 'notlike':
                     parameters.push(value);
                     return `not ${fieldName} like '%' || ? || '%'`;
-                case "gt":
+                case 'gt':
                     parameters.push(value);
                     return `${fieldName} > ?`;
-                case "lt":
+                case 'lt':
                     parameters.push(value);
                     return `${fieldName} < ?`;
-                case "ge":
+                case 'ge':
                     parameters.push(value);
                     return `${fieldName} >= ?`;
-                case "le":
+                case 'le':
                     parameters.push(value);
                     return `${fieldName} <= ?`;
-                case "ne":
-                    if (value === "null") {
+                case 'ne':
+                    if (value === 'null') {
                         return `${fieldName} is not null`;
                     }
                     parameters.push(value);
                     return `${fieldName} != ?`;
-                case "eq":
-                case "":
+                case 'eq':
+                case '':
                 default:
-                    if (value === "null") {
+                    if (value === 'null') {
                         return `${fieldName} is null`;
                     }
                     parameters.push(value);
                     return `${fieldName} = ?`;
             }
         })
-            .join(" and ");
+            .join(' and ');
     return { whereClause, parameters };
 };
 async function default_1(dbPath) {
@@ -81,7 +81,7 @@ async function default_1(dbPath) {
             const query = req.query;
             const { whereClause, parameters } = Object.keys(query).length > 0
                 ? getWhereClauseAndParameters(query)
-                : { whereClause: "", parameters: [] };
+                : { whereClause: '', parameters: [] };
             const stmt = await db.prepare(`SELECT * FROM ${tableName} ${whereClause}`);
             try {
                 const data = await stmt.all(parameters);
@@ -96,7 +96,7 @@ async function default_1(dbPath) {
             const query = req.query;
             const { whereClause, parameters } = Object.keys(query).length > 0
                 ? getWhereClauseAndParameters(query)
-                : { whereClause: "", parameters: [] };
+                : { whereClause: '', parameters: [] };
             const stmt = await db.prepare(`DELETE FROM ${tableName} ${whereClause}`);
             try {
                 const result = await stmt.run(parameters);
@@ -111,9 +111,9 @@ async function default_1(dbPath) {
             const body = req.body;
             const keys = Object.keys(body);
             const values = Object.values(body);
-            const stmt = await db.prepare(`INSERT INTO ${tableName} (${keys.join(",")}) VALUES (${Array(values.length)
-                .fill("?")
-                .join(",")})`);
+            const stmt = await db.prepare(`INSERT INTO ${tableName} (${keys.join(',')}) VALUES (${Array(values.length)
+                .fill('?')
+                .join(',')})`);
             try {
                 const result = await stmt.run(values);
                 res.status(200).json(result.lastID);
@@ -127,7 +127,7 @@ async function default_1(dbPath) {
             const query = req.query;
             const { whereClause, parameters: whereParameters } = Object.keys(query).length > 0
                 ? getWhereClauseAndParameters(query)
-                : { whereClause: "", parameters: [] };
+                : { whereClause: '', parameters: [] };
             const body = req.body;
             const setParameters = [];
             const setClause = Object.keys(body)
@@ -135,7 +135,7 @@ async function default_1(dbPath) {
                 setParameters.push(body[key]);
                 return `${key} = ?`;
             })
-                .join(",");
+                .join(',');
             const stmt = await db.prepare(`UPDATE ${tableName} SET ${setClause} ${whereClause}`);
             console.log({ stmt, setClause, whereClause });
             try {
@@ -162,7 +162,7 @@ async function default_1(dbPath) {
         return [...prev, ...methods];
     }, []);
     app.get(`/`, async (req, res) => {
-        res.render("./index.ejs", { dbPath, routes });
+        res.render('./index.ejs', { dbPath, routes });
     });
     return { app, routes };
 }
