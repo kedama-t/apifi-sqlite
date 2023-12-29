@@ -37,9 +37,9 @@ SELECT * FROM Users WHERE user_id = 1
 - `like` : `http://localhost:3000/Users?user_name,like=john` - `SELECT * FROM Users WHERE user_id like '%john%'`
 - `notlike` : `http://localhost:3000/Users?user_name,notlike=john` - `SELECT * FROM Users WHERE user_id not like '%john%'`
 - `gt` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id > 1`
-- `ge` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id >= 1`
-- `lt` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id < 1`
-- `le` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id <= 1`
+- `ge` : `http://localhost:3000/Users?user_id,ge=1` - `SELECT * FROM Users WHERE user_id >= 1`
+- `lt` : `http://localhost:3000/Users?user_id,lt=1` - `SELECT * FROM Users WHERE user_id < 1`
+- `le` : `http://localhost:3000/Users?user_id,le=1` - `SELECT * FROM Users WHERE user_id <= 1`
 
 #### with null value
 - `eq` : `http://localhost:3000/Users?user_id,eq=null` - `SELECT * FROM Users WHERE user_id is null`
