@@ -35,11 +35,15 @@ SELECT * FROM Users WHERE user_id = 1
 - `in` : `http://localhost:3000/Users?user_id,in=1,2,3` - `SELECT * FROM Users WHERE user_id in (1,2,3)`
 - `notin` : `http://localhost:3000/Users?user_id,notin=1,2,3` - `SELECT * FROM Users WHERE user_id not in (1,2,3)`
 - `like` : `http://localhost:3000/Users?user_name,like=john` - `SELECT * FROM Users WHERE user_id like '%john%'`
-- `notlike` : `http://localhost:3000/Users?user_name,notlike=john` - `SELECT * FROM Users WHERE user_id notlike '%john%'`
+- `notlike` : `http://localhost:3000/Users?user_name,notlike=john` - `SELECT * FROM Users WHERE user_id not like '%john%'`
 - `gt` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id > 1`
 - `ge` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id >= 1`
 - `lt` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id < 1`
 - `le` : `http://localhost:3000/Users?user_id,gt=1` - `SELECT * FROM Users WHERE user_id <= 1`
+
+#### with null value
+- `eq` : `http://localhost:3000/Users?user_id,eq=null` - `SELECT * FROM Users WHERE user_id is null`
+- `ne` : `http://localhost:3000/Users?user_id,ne=null` - `SELECT * FROM Users WHERE user_id is not null`
 
 ### `POST`
 
