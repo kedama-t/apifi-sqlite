@@ -1,14 +1,23 @@
 {
-  "name": "sqlite",
+  "name": "apifi-sqlite",
   "version": "1.0.0",
   "description": "Serve API Routes with SQLite",
+  "main": "dist/serve.js",
   "bin": {
-    "": "./dist/index.js"
+    "apifi-sqlite": "./bin/bin.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "scripts": {
     "build": "tsc",
-    "serve": "npm run build && node ./dist/serve.js $npm_config_database",
-    "dev": "ts-node ./src/serve.ts $npm_config_database"
+    "serve": "npm run build && node ./dist/index.js $npm_config_database",
+    "dev": "ts-node ./src/index.ts $npm_config_database",
+    "format": "pnpm exec prettier . --write",
+    "test": "pnpm build && jest --roots ./dist"
   },
   "keywords": [],
   "author": "Takeda.M",
@@ -22,8 +31,13 @@
     "sqlite3": "^5.1.4"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "@types/express": "^4.17.15",
+    "@types/jest": "^29.5.11",
+    "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
+    "prettier": "3.1.1",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.3"
   }
