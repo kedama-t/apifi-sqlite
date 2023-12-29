@@ -9,4 +9,4 @@ npx apifi-sqlite {sqlite_filename} {port}
 ```
 
 - `{sqlite_filename}` - path to SQLite database file.
-- `{port}` - (Optional) Port for the API.
+- `{port}` - (Optional) Port for the API. Default:`3000`
