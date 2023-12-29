@@ -1,2 +1,3 @@
 *.db
+dist/__test__
 node_modules
