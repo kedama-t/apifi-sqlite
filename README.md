@@ -27,7 +27,7 @@ npx apifi-sqlite {sqlite_filename} {port}
 SELECT * FROM Users WHERE user_id = 1
 ```
 
-#### Operands
+#### Operators
 
 - default : `http://localhost:3000/Users?user_id=1` - `SELECT * FROM Users WHERE user_id = 1`
 - `eq` : `http://localhost:3000/Users?user_id,eq=1` - `SELECT * FROM Users WHERE user_id = 1`

@@ -13,10 +13,10 @@ const getWhereClauseAndParameters = (query) => {
     const whereClause = 'WHERE ' +
         Object.keys(query)
             .map((key) => {
-            const [fieldName, operand] = key.split(',');
+            const [fieldName, operator] = key.split(',');
             const value = query[key];
             const paramCount = value.split(',').length;
-            switch (operand?.toLowerCase()) {
+            switch (operator?.toLowerCase()) {
                 case 'in':
                     parameters.push(...value.split(','));
                     return `${fieldName} in (${Array(paramCount).fill('?').join(',')})`;
@@ -139,7 +139,6 @@ async function default_1(dbPath) {
             })
                 .join(',');
             const stmt = await db.prepare(`UPDATE ${tableName} SET ${setClause} ${whereClause}`);
-            console.log({ stmt, setClause, whereClause });
             try {
                 const result = await stmt.run([...setParameters, ...whereParameters]);
                 res.status(200).json(result.changes);
