@@ -1,6 +1,6 @@
 {
   "name": "apifi-sqlite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Serve API Routes with SQLite",
   "main": "dist/serve.js",
   "bin": {
